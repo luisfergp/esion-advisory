@@ -60,52 +60,72 @@ function mostrarResultados() {
         return lista.length > 0 ? (lista.reduce((a, b) => a + b, 0) / lista.length) : 0;
     });
 
+    // --- CÁLCULO DE NOTA FINAL ---
+    const notaFinal = (dataNIST.reduce((a, b) => a + b, 0) / 5).toFixed(1);
+
+    // Determinar texto de nivel
+    let nivelTexto = "";
+    let colorClase = "";
+    if (notaFinal >= 4.5) { nivelTexto = "Optimizado (Nivel 5)"; colorClase = "text-green-600"; }
+    else if (notaFinal >= 3.5) { nivelTexto = "Gestionado (Nivel 4)"; colorClase = "text-blue-600"; }
+    else if (notaFinal >= 2.5) { nivelTexto = "Definido (Nivel 3)"; colorClase = "text-yellow-600"; }
+    else if (notaFinal >= 1.5) { nivelTexto = "En Desarrollo (Nivel 2)"; colorClase = "text-orange-600"; }
+    else { nivelTexto = "Inicial (Nivel 1)"; colorClase = "text-red-600"; }
+
     // 2. Mostrar contenedores
     document.getElementById('results-container').classList.remove('hidden');
     document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
 
-    // 3. GENERADOR DE RECOMENDACIONES DETALLADAS
+    // 3. GENERADOR DE CONTENIDO (Puntuación + Recomendaciones)
     const recDiv = document.getElementById('recommendations');
-    let htmlRecs = `<h3 class='text-xl font-bold text-blue-900 mb-6'>Análisis Estratégico de Esion Advisory</h3>`;
+    
+    // CABECERA CON NOTA GRANDE
+    let htmlContent = `
+        <div class="text-center mb-12 py-10 bg-slate-50 rounded-3xl border-2 border-slate-100 shadow-inner">
+            <p class="text-slate-500 uppercase tracking-widest text-xs font-black mb-2">Índice de Resiliencia Global</p>
+            <div class="text-7xl font-black text-blue-900 mb-2">${notaFinal} <span class="text-2xl text-slate-300">/ 5.0</span></div>
+            <p class="text-lg font-bold ${colorClase}">${nivelTexto}</p>
+        </div>
+        
+        <h3 class='text-xl font-bold text-blue-900 mb-6 px-2 border-b-2 border-blue-100 pb-2'>Análisis Estratégico</h3>
+    `;
     
     // Lógica de diagnóstico por eje
     const diagnosticos = [
-        { nombre: 'Identificar', valor: dataNIST[0], consejo: 'Falta visibilidad sobre sus activos y riesgos. Sin un inventario y gobernanza clara, la seguridad es reactiva.' },
-        { nombre: 'Proteger', valor: dataNIST[1], consejo: 'Sus barreras preventivas (MFA, Cifrado, Concienciación) son insuficientes. El factor humano es su mayor riesgo actual.' },
-        { nombre: 'Detectar', valor: dataNIST[2], consejo: 'Está operando "a ciegas". Necesita implementar monitorización continua para identificar ataques antes de que sea tarde.' },
-        { nombre: 'Responder', valor: dataNIST[3], consejo: 'No tiene capacidad de reacción formal. Un incidente hoy podría paralizar la empresa por falta de protocolos.' },
-        { nombre: 'Recuperar', valor: dataNIST[4], consejo: 'Su resiliencia es baja. Necesita asegurar copias inmutables y planes de continuidad de negocio.' }
+        { nombre: 'Identificar', valor: dataNIST[0], consejo: 'Falta visibilidad sobre sus activos y riesgos. Sin un inventario claro, la seguridad es reactiva.' },
+        { nombre: 'Proteger', valor: dataNIST[1], consejo: 'Sus barreras preventivas son insuficientes. El factor humano y el acceso sin MFA son riesgos críticos.' },
+        { nombre: 'Detectar', valor: dataNIST[2], consejo: 'Operación "a ciegas". Necesita monitorización para identificar ataques antes de que el impacto sea total.' },
+        { nombre: 'Responder', valor: dataNIST[3], consejo: 'Capacidad de reacción informal. Un incidente podría paralizar la operativa por falta de protocolos.' },
+        { nombre: 'Recuperar', valor: dataNIST[4], consejo: 'Resiliencia baja. Urge asegurar copias inmutables y planes de continuidad probados.' }
     ];
 
     diagnosticos.forEach(d => {
-        if (d.valor < 3.5) { // Si la nota es baja (Criterio consultivo)
-            htmlRecs += `
-                <div class='mb-4 p-4 bg-white border-l-4 border-red-500 shadow-sm rounded-r-lg'>
-                    <span class='text-xs font-bold text-red-600 uppercase tracking-wider'>Prioridad Alta: ${d.nombre}</span>
-                    <p class='text-slate-700 text-sm mt-1'>${d.consejo}</p>
-                </div>`;
-        } else {
-            htmlRecs += `
-                <div class='mb-4 p-4 bg-white border-l-4 border-green-500 shadow-sm rounded-r-lg'>
-                    <span class='text-xs font-bold text-green-600 uppercase tracking-wider'>Fortaleza: ${d.nombre}</span>
-                    <p class='text-slate-700 text-sm mt-1'>Mantiene un nivel adecuado, continúe con la mejora continua.</p>
-                </div>`;
-        }
+        const colorBarra = d.valor < 3.5 ? 'border-red-500' : 'border-green-500';
+        const labelColor = d.valor < 3.5 ? 'text-red-600' : 'text-green-600';
+        
+        htmlContent += `
+            <div class='mb-4 p-5 bg-white border-l-8 ${colorBarra} shadow-sm rounded-r-xl'>
+                <div class='flex justify-between items-center mb-1'>
+                    <span class='text-xs font-black uppercase tracking-wider ${labelColor}'>${d.nombre}</span>
+                    <span class='text-xs font-bold text-slate-400'>${d.valor.toFixed(1)} / 5.0</span>
+                </div>
+                <p class='text-slate-700 text-sm leading-relaxed'>${d.valor < 3.5 ? d.consejo : 'Cumplimiento adecuado. Mantenga la revisión periódica de controles.'}</p>
+            </div>`;
     });
 
-    // Botón de contacto dinámico
-    htmlRecs += `
-        <div class='mt-10 p-6 bg-blue-900 text-white rounded-2xl text-center shadow-xl'>
-            <h4 class='text-lg font-bold mb-2'>¿Necesita un Plan de Remediación?</h4>
-            <p class='text-blue-100 text-sm mb-6 text-balance'>Podemos ayudarle a cerrar estas brechas y cumplir con normativas DORA, NIS2 y leyes de privacidad en España y Latam.</p>
-            <a href='mailto:contacto@esionadvisory.com?subject=Informe EvalSeg' class='inline-block bg-white text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition-colors'>
-                Solicitar Auditoría Detallada
+    // Botón de contacto final
+    htmlContent += `
+        <div class='mt-12 p-8 bg-blue-900 text-white rounded-3xl text-center shadow-2xl transform hover:scale-[1.02] transition-transform'>
+            <h4 class='text-xl font-bold mb-3'>¿Desea cerrar estas brechas?</h4>
+            <p class='text-blue-200 text-sm mb-8 max-w-md mx-auto'>Su organización presenta puntos críticos en la normativa <strong>DORA/NIS2</strong>. En Esion Advisory diseñamos su plan de remediación a medida.</p>
+            <a href='mailto:contacto@esionadvisory.com?subject=Informe EvalSeg ${notaFinal}' class='inline-block bg-white text-blue-900 px-10 py-4 rounded-full font-black uppercase text-sm tracking-widest hover:bg-blue-50 shadow-lg'>
+                Contactar con un Consultor
             </a>
         </div>`;
 
-    recDiv.innerHTML = htmlRecs;
+    recDiv.innerHTML = htmlContent;
 
-    // 4. DIBUJAR GRÁFICO (Optimizado)
+    // 4. DIBUJAR GRÁFICO
     const ctx = document.getElementById('complianceChart');
     if (window.myChart) { window.myChart.destroy(); }
     window.myChart = new Chart(ctx, {
@@ -113,19 +133,19 @@ function mostrarResultados() {
         data: {
             labels: ['Identificar', 'Proteger', 'Detectar', 'Responder', 'Recuperar'],
             datasets: [{
-                label: 'Nivel de Madurez NIST CSF',
+                label: 'Madurez NIST CSF',
                 data: dataNIST.map(v => v.toFixed(2)),
-                backgroundColor: 'rgba(30, 58, 138, 0.2)',
+                backgroundColor: 'rgba(30, 58, 138, 0.15)',
                 borderColor: 'rgb(30, 58, 138)',
                 pointBackgroundColor: 'rgb(30, 58, 138)',
+                pointRadius: 4,
                 borderWidth: 3
             }]
         },
         options: {
-            scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } },
+            scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, display: false }, grid: { color: '#e2e8f0' } } },
             plugins: { legend: { display: false } }
         }
     });
 }
-
 document.addEventListener('DOMContentLoaded', cargarPreguntas);
