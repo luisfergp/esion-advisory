@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "bloque": "IDENTIFICAR",
+        "pregunta": "¿Posee un inventario actualizado de activos (HW, SW, Cloud) y su criticidad?",
+        "marcos": ["NIST", "DORA", "ISO27001"]
+    },
+    {
+        "id": 2,
+        "bloque": "IDENTIFICAR",
+        "pregunta": "¿La alta dirección aprueba y supervisa formalmente la estrategia de ciberseguridad?",
+        "marcos": ["NIS2", "DORA", "ISO27001"]
+    },
+    {
+        "id": 3,
+        "bloque": "PROTEGER",
+        "pregunta": "¿Se aplica Doble Factor de Autenticación (MFA) para accesos críticos y administrativos?",
+        "marcos": ["NIST", "ENS", "RGPD", "DORA"]
+    }
+]
