@@ -1,45 +1,128 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esion Advisory | Resiliencia Global, Cumplimiento Local</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(90deg, #1e3a8a, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
-    <nav class="bg-white shadow-sm p-6 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-blue-900">ESION ADVISORY</h1>
-        <div class="space-x-6">
-            <a href="#servicios" class="hover:text-blue-600">Servicios</a>
-            <a href="evalseg.html" class="bg-blue-900 text-white px-4 py-2 rounded shadow">Probar EvalSeg</a>
+<body class="bg-white text-slate-900">
+
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-900 rounded-lg"></div>
+                <span class="text-xl font-black tracking-tighter text-blue-900 uppercase">Esion Advisory</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-600">
+                <a href="#servicios" class="hover:text-blue-900 transition-colors">Servicios</a>
+                <a href="#metodologia" class="hover:text-blue-900 transition-colors">Metodología</a>
+                <a href="evalseg.html" class="bg-blue-900 text-white px-6 py-2.5 rounded-full hover:bg-blue-800 transition-all shadow-lg shadow-blue-900/20">Probar EvalSeg</a>
+            </div>
         </div>
     </nav>
 
-    <header class="py-20 px-10 text-center bg-white">
-        <h2 class="text-5xl font-extrabold mb-4">Resiliencia Global, Cumplimiento Local.</h2>
-        <p class="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-            Consultoría estratégica para organizaciones en España y Latinoamérica. Impulsamos su seguridad bajo marcos NIST, ISO 27001, ENS, NIS2 y DORA.
-        </p>
-        <a href="evalseg.html" class="text-lg bg-blue-900 text-white px-8 py-3 rounded-full font-bold">Iniciar Evaluación de Madurez</a>
+    <header class="relative pt-20 pb-32 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 text-xs font-black uppercase tracking-widest rounded-full mb-6">
+                    Estrategia GRC & Ciberseguridad
+                </span>
+                <h1 class="text-5xl lg:text-7xl font-black leading-[1.1] mb-6">
+                    Resiliencia <span class="gradient-text">Global</span>,<br> Cumplimiento Local.
+                </h1>
+                <p class="text-xl text-slate-500 mb-10 leading-relaxed max-w-lg">
+                    Consultoría estratégica para organizaciones que operan entre España y Latinoamérica. Navegamos la complejidad de NIST, DORA, NIS2 e ISO 27001.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="evalseg.html" class="px-8 py-4 bg-blue-900 text-white rounded-2xl font-bold text-center hover:bg-blue-800 transition-all shadow-xl shadow-blue-900/30">
+                        Iniciar Diagnóstico Gratuito
+                    </a>
+                    <a href="#servicios" class="px-8 py-4 bg-white border border-slate-200 text-slate-600 rounded-2xl font-bold text-center hover:bg-slate-50 transition-all">
+                        Ver Servicios
+                    </a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+                <div class="relative bg-white p-8 rounded-3xl shadow-2xl border border-slate-100 transform rotate-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="h-4 bg-slate-100 rounded w-3/4"></div>
+                        <div class="h-4 bg-slate-100 rounded w-full"></div>
+                        <div class="h-24 bg-blue-50 rounded-xl flex items-center justify-center">
+                            <span class="text-blue-300 font-bold text-xs uppercase tracking-widest">Visualización Radar NIST</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <section id="servicios" class="py-16 px-10 grid md:grid-cols-3 gap-8">
-        <div class="p-6 bg-white border rounded-xl shadow-sm">
-            <h3 class="text-xl font-bold mb-3">GRC Unificado</h3>
-            <p class="text-sm text-slate-600">Navegamos la complejidad de ISO 27001, ENS, NIS2 y DORA usando NIST como lenguaje universal.</p>
+    <section id="servicios" class="py-24 bg-slate-50 px-6">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="text-3xl font-black mb-4">Nuestros Pilares de Valor</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto italic">Acompañamos a empresas en España, México, Colombia y Perú en sus desafíos de gobernanza.</p>
         </div>
-        <div class="p-6 bg-white border rounded-xl shadow-sm">
-            <h3 class="text-xl font-bold mb-3">Privacidad Transversal</h3>
-            <p class="text-sm text-slate-600">Adecuación técnica al RGPD y legislaciones locales en México (LFPDPPP), Colombia (1581) y Perú (29733).</p>
-        </div>
-        <div class="p-6 bg-white border rounded-xl shadow-sm">
-            <h3 class="text-xl font-bold mb-3">Concienciación</h3>
-            <p class="text-sm text-slate-600">Transformamos el comportamiento organizacional fortaleciendo el factor humano.</p>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-200 hover:shadow-xl transition-shadow group">
+                <div class="w-12 h-12 bg-blue-900 rounded-2xl mb-6 flex items-center justify-center text-white group-hover:scale-110 transition-transform font-bold">01</div>
+                <h3 class="text-xl font-black mb-4 uppercase tracking-tight">GRC Unificado</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6">Implementación de marcos NIST e ISO 27001 adaptados a la normativa sectorial: <strong>DORA</strong> (Financiero) y <strong>NIS2</strong>.</p>
+                <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">España & UE</span>
+            </div>
+            <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-200 hover:shadow-xl transition-shadow group">
+                <div class="w-12 h-12 bg-blue-600 rounded-2xl mb-6 flex items-center justify-center text-white group-hover:scale-110 transition-transform font-bold">02</div>
+                <h3 class="text-xl font-black mb-4 uppercase tracking-tight">Privacidad Transversal</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6">Adecuación técnica al <strong>RGPD</strong>, <strong>Ley 1581</strong> (Colombia), <strong>LFPDPPP</strong> (México) y <strong>Ley 29733</strong> (Perú).</p>
+                <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Multi-Jurisdicción</span>
+            </div>
+            <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-200 hover:shadow-xl transition-shadow group">
+                <div class="w-12 h-12 bg-slate-800 rounded-2xl mb-6 flex items-center justify-center text-white group-hover:scale-110 transition-transform font-bold">03</div>
+                <h3 class="text-xl font-black mb-4 uppercase tracking-tight">Cultura & Humano</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6">Programas avanzados de concienciación y gestión del factor humano. No solo formamos, transformamos comportamientos.</p>
+                <span class="text-blue-600 text-xs font-bold uppercase tracking-widest">Resiliencia Cultural</span>
+            </div>
         </div>
     </section>
 
-    <footer class="p-10 bg-slate-900 text-white text-center">
-        <p>© 2024 Esion Advisory. Sede en Madrid | Presencia en Latam.</p>
+    <section class="py-24 px-6">
+        <div class="max-w-5xl mx-auto bg-blue-900 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl">
+            <div class="relative z-10">
+                <h2 class="text-3xl lg:text-5xl font-black text-white mb-8">¿Conoce su nivel de madurez real?</h2>
+                <p class="text-blue-100 text-lg mb-10 max-w-xl mx-auto opacity-80 font-medium">
+                    Use nuestra herramienta EvalSeg para obtener un diagnóstico basado en NIST CSF y descubra sus brechas de cumplimiento hoy mismo.
+                </p>
+                <a href="evalseg.html" class="inline-block px-10 py-5 bg-white text-blue-900 rounded-2xl font-black uppercase text-sm tracking-widest hover:bg-blue-50 transition-colors shadow-lg">
+                    Empezar Evaluación Gratuita
+                </a>
+            </div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-800 rounded-full -mr-20 -mt-20 opacity-50"></div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-100 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-black text-blue-900 uppercase tracking-tighter">Esion Advisory</span>
+                </div>
+                <p class="text-xs text-slate-400 font-medium tracking-wide">
+                    © 2026 Esion Advisory. Madrid · Ciudad de México · Bogotá · Lima. <br>
+                    Basado en marcos NIST CSF, ISO 27001, DORA y NIS2.
+                </p>
+            </div>
+        </div>
     </footer>
+
 </body>
 </html>
