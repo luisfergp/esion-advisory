@@ -1,20 +1,92 @@
 [
-    {
-        "id": 1,
-        "bloque": "IDENTIFICAR",
-        "pregunta": "¿Posee un inventario actualizado de activos (HW, SW, Cloud) y su criticidad?",
-        "marcos": ["NIST", "DORA", "ISO27001"]
-    },
-    {
-        "id": 2,
-        "bloque": "IDENTIFICAR",
-        "pregunta": "¿La alta dirección aprueba y supervisa formalmente la estrategia de ciberseguridad?",
-        "marcos": ["NIS2", "DORA", "ISO27001"]
-    },
-    {
-        "id": 3,
-        "bloque": "PROTEGER",
-        "pregunta": "¿Se aplica Doble Factor de Autenticación (MFA) para accesos críticos y administrativos?",
-        "marcos": ["NIST", "ENS", "RGPD", "DORA"]
-    }
+  {
+    "id": 1,
+    "bloque": "IDENTIFICAR",
+    "pregunta": "¿Posee un inventario actualizado de activos (HW, SW, Datos) y conoce quién es el responsable de cada uno?",
+    "marcos": ["NIST", "ISO27001", "DORA"]
+  },
+  {
+    "id": 2,
+    "bloque": "IDENTIFICAR",
+    "pregunta": "¿La alta dirección aprueba formalmente la estrategia de seguridad y se revisa al menos una vez al año?",
+    "marcos": ["DORA", "ISO27001", "NIS2"]
+  },
+  {
+    "id": 3,
+    "bloque": "IDENTIFICAR",
+    "pregunta": "¿Se han identificado y clasificado los datos personales que maneja la empresa (Clientes, Empleados, Proveedores)?",
+    "marcos": ["RGPD", "NIST"]
+  },
+  {
+    "id": 4,
+    "bloque": "PROTEGER",
+    "pregunta": "¿Se exige el uso de Doble Factor de Autenticación (MFA) para acceder a correos y sistemas con datos sensibles?",
+    "marcos": ["NIST", "DORA", "RGPD"]
+  },
+  {
+    "id": 5,
+    "bloque": "PROTEGER",
+    "pregunta": "¿Existe un programa de concienciación periódica para empleados sobre phishing y riesgos de ingeniería social?",
+    "marcos": ["NIST", "DORA", "ISO27001"]
+  },
+  {
+    "id": 6,
+    "bloque": "PROTEGER",
+    "pregunta": "¿Se aplican medidas de cifrado para los datos sensibles tanto cuando están guardados como cuando se envían?",
+    "marcos": ["RGPD", "ISO27001"]
+  },
+  {
+    "id": 7,
+    "bloque": "DETECTAR",
+    "pregunta": "¿La organización monitoriza en tiempo real sus sistemas para detectar accesos no autorizados o actividades inusuales?",
+    "marcos": ["NIST", "NIS2", "DORA"]
+  },
+  {
+    "id": 8,
+    "bloque": "DETECTAR",
+    "pregunta": "¿Se realizan escaneos de vulnerabilidades o auditorías técnicas periódicas sobre su infraestructura crítica?",
+    "marcos": ["ISO27001", "NIS2"]
+  },
+  {
+    "id": 9,
+    "bloque": "RESPONDER",
+    "pregunta": "¿Existe un Plan de Respuesta a Incidentes formal con roles definidos y protocolos de comunicación?",
+    "marcos": ["NIST", "DORA", "NIS2"]
+  },
+  {
+    "id": 10,
+    "bloque": "RESPONDER",
+    "pregunta": "¿La empresa conoce los plazos legales para notificar una brecha de datos a la autoridad competente (AEPD, INAI, SIC)?",
+    "marcos": ["RGPD", "DORA"]
+  },
+  {
+    "id": 11,
+    "bloque": "RECUPERAR",
+    "pregunta": "¿Se realizan copias de seguridad aisladas (inmutables u offline) y se han probado recientemente?",
+    "marcos": ["NIST", "DORA", "ISO27001"]
+  },
+  {
+    "id": 12,
+    "bloque": "RECUPERAR",
+    "pregunta": "¿Cuenta con un Plan de Continuidad de Negocio que garantice operar tras un ataque de Ransomware?",
+    "marcos": ["NIS2", "DORA"]
+  },
+  {
+    "id": 13,
+    "bloque": "PRIVACIDAD",
+    "pregunta": "¿Dispone de avisos de privacidad actualizados y mecanismos para que los ciudadanos ejerzan sus derechos (ARCO)?",
+    "marcos": ["RGPD"]
+  },
+  {
+    "id": 14,
+    "bloque": "PRIVACIDAD",
+    "pregunta": "¿Se evalúan los riesgos de seguridad de los proveedores externos antes de contratarlos y compartir datos?",
+    "marcos": ["DORA", "ISO27001", "RGPD"]
+  },
+  {
+    "id": 15,
+    "bloque": "CUMPLIMIENTO",
+    "pregunta": "¿Existe un oficial de seguridad o delegado de protección de datos (DPO) que supervise el cumplimiento?",
+    "marcos": ["ISO27001", "RGPD", "NIS2"]
+  }
 ]
