@@ -1,7 +1,7 @@
 // Lógica de EvalSeg v1.0
 async function cargarPreguntas() {
     try {
-        const respuesta = await fetch('data/questions.json');
+        const respuesta = await fetch('./data/questions.json');
         const preguntas = await respuesta.json();
         const contenedor = document.getElementById('quiz-container');
 
