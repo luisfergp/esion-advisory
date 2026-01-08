@@ -135,6 +135,23 @@
         </div>
     </div>
 </footer>
-
+<div id="cookie-notice" class="fixed bottom-6 left-6 right-6 md:left-auto md:w-96 bg-white border border-slate-200 shadow-2xl rounded-2xl p-6 z-[100] transform translate-y-0 transition-transform duration-500">
+    <div class="flex items-start gap-4">
+        <div class="bg-blue-50 p-2 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04customM12 21.48l.348-.07a12.32 12.32 0 005.734-2.332m-12.164 0a12.32 12.32 0 005.734 2.332" />
+            </svg>
+        </div>
+        <div>
+            <h4 class="text-sm font-black text-blue-900 uppercase tracking-tight">Privacidad por Diseño</h4>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                Este sitio no utiliza cookies de rastreo ni publicidad. Tu navegación es 100% privada y anónima.
+            </p>
+            <button onclick="document.getElementById('cookie-notice').style.display='none'" class="mt-4 text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-800">
+                Entendido
+            </button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
