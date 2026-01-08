@@ -45,40 +45,49 @@ async function cargarPreguntas() {
 function mostrarResultados() {
     const scores = { 'NIST': [], 'DORA': [], 'ISO27001': [], 'RGPD': [] };
 
-    // 1. Recopilar respuestas
     preguntasGlobal.forEach(p => {
         const seleccion = document.querySelector(`input[name="q${p.id}"]:checked`);
         const valor = seleccion ? parseFloat(seleccion.value) : 0;
-        
-        // Asignar el valor a cada marco que tenga la pregunta
         if (p.marcos) {
-            p.marcos.forEach(marco => {
-                if (scores[marco]) scores[marco].push(valor);
-            });
+            p.marcos.forEach(marco => { if (scores[marco]) scores[marco].push(valor); });
         }
     });
 
-    // 2. Calcular promedios
+    const etiquetas = ['NIST CSF', 'DORA / NIS2', 'ISO 27001', 'Privacidad'];
     const promedios = Object.keys(scores).map(marco => {
         const lista = scores[marco];
-        return lista.length > 0 ? (lista.reduce((a, b) => a + b, 0) / lista.length).toFixed(2) : 0;
+        return lista.length > 0 ? (lista.reduce((a, b) => a + b, 0) / lista.length) : 0;
     });
 
-    // 3. Mostrar contenedor y dibujar gráfico
     document.getElementById('results-container').classList.remove('hidden');
     document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
 
-    const ctx = document.getElementById('complianceChart');
+    // --- LÓGICA DE RECOMENDACIONES ---
+    const recDiv = document.getElementById('recommendations');
+    recDiv.innerHTML = "<h3 class='text-lg font-bold text-blue-900 mb-4'>Análisis de brechas de Esion Advisory:</h3>";
     
-    // Destruir gráfico previo si existe para evitar errores
-    if (window.myChart) { window.myChart.destroy(); }
+    if (promedios[1] < 3) { // Si DORA/NIS2 es bajo
+        recDiv.innerHTML += `
+            <div class='p-4 bg-orange-50 border-l-4 border-orange-500 mb-4 text-sm'>
+                <strong>⚠️ Riesgo en Resiliencia Operativa:</strong> Su nivel en marcos DORA/NIS2 es crítico. Necesita fortalecer la gestión de riesgos de terceros y planes de respuesta.
+            </div>`;
+    }
+    if (promedios[3] < 4) { // Si Privacidad es bajo
+        recDiv.innerHTML += `
+            <div class='p-4 bg-blue-50 border-l-4 border-blue-500 mb-4 text-sm'>
+                <strong>💡 Oportunidad en Privacidad:</strong> Detectamos debilidades en la protección de datos (RGPD/Ley 1581/INAI). Recomendamos una adecuación técnica inmediata.
+            </div>`;
+    }
 
+    // --- RENDERIZADO DEL GRÁFICO ---
+    const ctx = document.getElementById('complianceChart');
+    if (window.myChart) { window.myChart.destroy(); }
     window.myChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['NIST CSF', 'DORA / NIS2', 'ISO 27001', 'Privacidad Global'],
+            labels: etiquetas,
             datasets: [{
-                label: 'Nivel de Madurez (0-5)',
+                label: 'Madurez Actual',
                 data: promedios,
                 backgroundColor: 'rgba(30, 58, 138, 0.2)',
                 borderColor: 'rgb(30, 58, 138)',
@@ -86,16 +95,17 @@ function mostrarResultados() {
                 borderWidth: 3
             }]
         },
-        options: {
-            scales: {
-                r: {
-                    min: 0,
-                    max: 5,
-                    ticks: { stepSize: 1 }
-                }
-            }
-        }
+        options: { scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } } }
     });
+
+    // --- BOTÓN DE CONTACTO FINAL ---
+    recDiv.innerHTML += `
+        <div class='mt-8 text-center'>
+            <p class='mb-4 font-semibold'>¿Necesita un informe detallado y un plan de remediación?</p>
+            <a href='mailto:tu-correo@esionadvisory.com?subject=Consulta EvalSeg' class='inline-block bg-green-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-green-700'>
+                Solicitar Consultoría Estratégica
+            </a>
+        </div>`;
 }
 
 document.addEventListener('DOMContentLoaded', cargarPreguntas);
