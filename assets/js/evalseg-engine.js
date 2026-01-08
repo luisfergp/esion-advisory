@@ -43,69 +43,89 @@ async function cargarPreguntas() {
 }
 
 function mostrarResultados() {
-    // Definimos los bloques oficiales de NIST
     const nistBlocks = ['IDENTIFICAR', 'PROTEGER', 'DETECTAR', 'RESPONDER', 'RECUPERAR'];
     const scores = { 'IDENTIFICAR': [], 'PROTEGER': [], 'DETECTAR': [], 'RESPONDER': [], 'RECUPERAR': [] };
 
-    // 1. Agrupar puntuaciones por bloque
+    // 1. Calcular puntuaciones por bloque NIST
     preguntasGlobal.forEach(p => {
         const seleccion = document.querySelector(`input[name="q${p.id}"]:checked`);
         const valor = seleccion ? parseFloat(seleccion.value) : 0;
-        
-        // Si el bloque de la pregunta existe en nuestro mapa de NIST, lo sumamos
         if (scores[p.bloque]) {
             scores[p.bloque].push(valor);
         }
     });
 
-    // 2. Calcular promedios para cada eje
     const dataNIST = nistBlocks.map(bloque => {
         const lista = scores[bloque];
-        return lista.length > 0 ? (lista.reduce((a, b) => a + b, 0) / lista.length).toFixed(2) : 0;
+        return lista.length > 0 ? (lista.reduce((a, b) => a + b, 0) / lista.length) : 0;
     });
 
-    // 3. Mostrar resultados y gráfico
+    // 2. Mostrar contenedores
     document.getElementById('results-container').classList.remove('hidden');
     document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
 
+    // 3. GENERADOR DE RECOMENDACIONES DETALLADAS
+    const recDiv = document.getElementById('recommendations');
+    let htmlRecs = `<h3 class='text-xl font-bold text-blue-900 mb-6'>Análisis Estratégico de Esion Advisory</h3>`;
+    
+    // Lógica de diagnóstico por eje
+    const diagnosticos = [
+        { nombre: 'Identificar', valor: dataNIST[0], consejo: 'Falta visibilidad sobre sus activos y riesgos. Sin un inventario y gobernanza clara, la seguridad es reactiva.' },
+        { nombre: 'Proteger', valor: dataNIST[1], consejo: 'Sus barreras preventivas (MFA, Cifrado, Concienciación) son insuficientes. El factor humano es su mayor riesgo actual.' },
+        { nombre: 'Detectar', valor: dataNIST[2], consejo: 'Está operando "a ciegas". Necesita implementar monitorización continua para identificar ataques antes de que sea tarde.' },
+        { nombre: 'Responder', valor: dataNIST[3], consejo: 'No tiene capacidad de reacción formal. Un incidente hoy podría paralizar la empresa por falta de protocolos.' },
+        { nombre: 'Recuperar', valor: dataNIST[4], consejo: 'Su resiliencia es baja. Necesita asegurar copias inmutables y planes de continuidad de negocio.' }
+    ];
+
+    diagnosticos.forEach(d => {
+        if (d.valor < 3.5) { // Si la nota es baja (Criterio consultivo)
+            htmlRecs += `
+                <div class='mb-4 p-4 bg-white border-l-4 border-red-500 shadow-sm rounded-r-lg'>
+                    <span class='text-xs font-bold text-red-600 uppercase tracking-wider'>Prioridad Alta: ${d.nombre}</span>
+                    <p class='text-slate-700 text-sm mt-1'>${d.consejo}</p>
+                </div>`;
+        } else {
+            htmlRecs += `
+                <div class='mb-4 p-4 bg-white border-l-4 border-green-500 shadow-sm rounded-r-lg'>
+                    <span class='text-xs font-bold text-green-600 uppercase tracking-wider'>Fortaleza: ${d.nombre}</span>
+                    <p class='text-slate-700 text-sm mt-1'>Mantiene un nivel adecuado, continúe con la mejora continua.</p>
+                </div>`;
+        }
+    });
+
+    // Botón de contacto dinámico
+    htmlRecs += `
+        <div class='mt-10 p-6 bg-blue-900 text-white rounded-2xl text-center shadow-xl'>
+            <h4 class='text-lg font-bold mb-2'>¿Necesita un Plan de Remediación?</h4>
+            <p class='text-blue-100 text-sm mb-6 text-balance'>Podemos ayudarle a cerrar estas brechas y cumplir con normativas DORA, NIS2 y leyes de privacidad en España y Latam.</p>
+            <a href='mailto:contacto@esionadvisory.com?subject=Informe EvalSeg' class='inline-block bg-white text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition-colors'>
+                Solicitar Auditoría Detallada
+            </a>
+        </div>`;
+
+    recDiv.innerHTML = htmlRecs;
+
+    // 4. DIBUJAR GRÁFICO (Optimizado)
     const ctx = document.getElementById('complianceChart');
     if (window.myChart) { window.myChart.destroy(); }
-
     window.myChart = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: ['Identificar', 'Proteger', 'Detectar', 'Responder', 'Recuperar'],
             datasets: [{
-                label: 'Nivel de Madurez (NIST CSF)',
-                data: dataNIST,
+                label: 'Nivel de Madurez NIST CSF',
+                data: dataNIST.map(v => v.toFixed(2)),
                 backgroundColor: 'rgba(30, 58, 138, 0.2)',
                 borderColor: 'rgb(30, 58, 138)',
                 pointBackgroundColor: 'rgb(30, 58, 138)',
-                borderWidth: 3,
-                fill: true
+                borderWidth: 3
             }]
         },
         options: {
-            scales: {
-                r: {
-                    min: 0,
-                    max: 5,
-                    beginAtZero: true,
-                    ticks: { stepSize: 1, backdropColor: 'transparent' },
-                    grid: { color: 'rgba(0, 0, 0, 0.1)' },
-                    angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
-                    pointLabels: { font: { size: 14, weight: 'bold' } }
-                }
-            },
-            plugins: {
-                legend: { position: 'top' }
-            }
+            scales: { r: { min: 0, max: 5, ticks: { stepSize: 1 } } },
+            plugins: { legend: { display: false } }
         }
     });
-
-    // Actualizar recomendaciones básicas
-    const recDiv = document.getElementById('recommendations');
-    recDiv.innerHTML = `<p class='text-slate-600 mb-4'>Basado en las funciones de NIST CSF, su resiliencia operativa es de <strong>${(dataNIST.reduce((a, b) => parseFloat(a) + parseFloat(b), 0) / 5).toFixed(1)}/5</strong>.</p>`;
 }
 
 document.addEventListener('DOMContentLoaded', cargarPreguntas);
