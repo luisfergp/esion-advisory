@@ -3,90 +3,168 @@
     "id": 1,
     "bloque": "IDENTIFICAR",
     "pregunta": "¿Posee un inventario actualizado de activos (HW, SW, Datos) y conoce quién es el responsable de cada uno?",
-    "marcos": ["NIST", "ISO27001", "DORA"]
+    "core": true,
+    "priority": 10,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] },
+    "why": "Sin inventario no hay control: es la base para priorizar riesgos y continuidad."
   },
   {
     "id": 2,
-    "bloque": "IDENTIFICAR",
+    "bloque": "GOBERNANZA",
     "pregunta": "¿La alta dirección aprueba formalmente la estrategia de seguridad y se revisa al menos una vez al año?",
-    "marcos": ["DORA", "ISO27001", "NIS2"]
+    "core": true,
+    "priority": 9,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] },
+    "why": "La seguridad es responsabilidad de dirección: sin gobierno no hay continuidad sostenible."
   },
   {
     "id": 3,
-    "bloque": "IDENTIFICAR",
-    "pregunta": "¿Se han identificado y clasificado los datos personales que maneja la empresa (Clientes, Empleados, Proveedores)?",
-    "marcos": ["RGPD", "NIST"]
+    "bloque": "PRIVACIDAD",
+    "pregunta": "¿Se han identificado y clasificado los datos personales que maneja la empresa (clientes, empleados, proveedores)?",
+    "core": false,
+    "priority": 7,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] },
+    "why": "Saber qué datos se tratan ayuda a protegerlos y a responder mejor ante incidentes."
   },
   {
     "id": 4,
     "bloque": "PROTEGER",
     "pregunta": "¿Se exige el uso de Doble Factor de Autenticación (MFA) para acceder a correos y sistemas con datos sensibles?",
-    "marcos": ["NIST", "DORA", "RGPD"]
+    "core": true,
+    "priority": 10,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] },
+    "why": "MFA reduce drásticamente el riesgo de intrusión por credenciales robadas."
   },
   {
     "id": 5,
     "bloque": "PROTEGER",
     "pregunta": "¿Existe un programa de concienciación periódica para empleados sobre phishing y riesgos de ingeniería social?",
-    "marcos": ["NIST", "DORA", "ISO27001"]
+    "core": true,
+    "priority": 8,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] }
   },
   {
     "id": 6,
     "bloque": "PROTEGER",
     "pregunta": "¿Se aplican medidas de cifrado para los datos sensibles tanto cuando están guardados como cuando se envían?",
-    "marcos": ["RGPD", "ISO27001"]
+    "core": false,
+    "priority": 6,
+    "apply": { "sizes": ["small", "mid", "upper_mid", "any"], "sectors": ["health", "finance", "legal", "tech", "any"], "revenues": ["any"] }
   },
   {
     "id": 7,
     "bloque": "DETECTAR",
-    "pregunta": "¿La organización monitoriza en tiempo real sus sistemas para detectar accesos no autorizados o actividades inusuales?",
-    "marcos": ["NIST", "NIS2", "DORA"]
+    "pregunta": "¿La organización monitoriza sus sistemas para detectar accesos no autorizados o actividades inusuales?",
+    "core": false,
+    "priority": 6,
+    "apply": { "sizes": ["mid", "upper_mid", "any"], "sectors": ["any"], "revenues": ["rev_c", "rev_d", "rev_e", "any"] },
+    "why": "Detectar antes reduce impacto y tiempo de recuperación."
   },
   {
     "id": 8,
     "bloque": "DETECTAR",
-    "pregunta": "¿Se realizan escaneos de vulnerabilidades o auditorías técnicas periódicas sobre su infraestructura crítica?",
-    "marcos": ["ISO27001", "NIS2"]
+    "pregunta": "¿Se realizan escaneos de vulnerabilidades o auditorías técnicas periódicas sobre infraestructura crítica?",
+    "core": false,
+    "priority": 6,
+    "apply": { "sizes": ["small", "mid", "upper_mid", "any"], "sectors": ["tech", "finance", "health", "industry", "any"], "revenues": ["any"] }
   },
   {
     "id": 9,
     "bloque": "RESPONDER",
     "pregunta": "¿Existe un Plan de Respuesta a Incidentes formal con roles definidos y protocolos de comunicación?",
-    "marcos": ["NIST", "DORA", "NIS2"]
+    "core": true,
+    "priority": 9,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] }
   },
   {
     "id": 10,
-    "bloque": "RESPONDER",
-    "pregunta": "¿La empresa conoce los plazos legales para notificar una brecha de datos a la autoridad competente (AEPD, INAI, SIC)?",
-    "marcos": ["RGPD", "DORA"]
+    "bloque": "PRIVACIDAD",
+    "pregunta": "¿La empresa conoce los plazos y el proceso interno para gestionar una brecha de datos personales (notificación y comunicación)?",
+    "core": false,
+    "priority": 6,
+    "apply": { "sizes": ["small", "mid", "upper_mid", "any"], "sectors": ["any"], "revenues": ["any"] }
   },
   {
     "id": 11,
     "bloque": "RECUPERAR",
     "pregunta": "¿Se realizan copias de seguridad aisladas (inmutables u offline) y se han probado recientemente?",
-    "marcos": ["NIST", "DORA", "ISO27001"]
+    "core": true,
+    "priority": 10,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] },
+    "why": "Backups probados son la base de continuidad ante ransomware."
   },
   {
     "id": 12,
     "bloque": "RECUPERAR",
-    "pregunta": "¿Cuenta con un Plan de Continuidad de Negocio que garantice operar tras un ataque de Ransomware?",
-    "marcos": ["NIS2", "DORA"]
+    "pregunta": "¿Cuenta con un Plan de Continuidad de Negocio que permita operar tras un incidente grave (p. ej. ransomware)?",
+    "core": true,
+    "priority": 8,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] }
   },
   {
     "id": 13,
     "bloque": "PRIVACIDAD",
-    "pregunta": "¿Dispone de avisos de privacidad actualizados y mecanismos para que los ciudadanos ejerzan sus derechos (ARCO)?",
-    "marcos": ["RGPD"]
+    "pregunta": "¿Dispone de avisos de privacidad actualizados y mecanismos para que las personas ejerzan sus derechos sobre sus datos?",
+    "core": false,
+    "priority": 5,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] }
   },
   {
     "id": 14,
-    "bloque": "PRIVACIDAD",
-    "pregunta": "¿Se evalúan los riesgos de seguridad de los proveedores externos antes de contratarlos y compartir datos?",
-    "marcos": ["DORA", "ISO27001", "RGPD"]
+    "bloque": "PROVEEDORES",
+    "pregunta": "¿Se evalúan los riesgos de seguridad de proveedores externos antes de contratarlos y compartir información?",
+    "core": true,
+    "priority": 8,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] },
+    "why": "Los terceros son una vía común de incidentes: se necesitan requisitos mínimos."
   },
   {
     "id": 15,
-    "bloque": "CUMPLIMIENTO",
-    "pregunta": "¿Existe un oficial de seguridad o delegado de protección de datos (DPO) que supervise el cumplimiento?",
-    "marcos": ["ISO27001", "RGPD", "NIS2"]
+    "bloque": "GOBERNANZA",
+    "pregunta": "¿Existe un responsable de seguridad y/o privacidad con autoridad para coordinar decisiones y seguimiento?",
+    "core": true,
+    "priority": 7,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] }
+  },
+
+  {
+    "id": 16,
+    "bloque": "PROTEGER",
+    "pregunta": "¿Gestiona cuentas privilegiadas (administradores) con controles reforzados (mínimo privilegio, revisiones, separación de funciones)?",
+    "core": false,
+    "priority": 7,
+    "apply": { "sizes": ["mid", "upper_mid", "any"], "sectors": ["any"], "revenues": ["rev_c", "rev_d", "rev_e", "any"] }
+  },
+  {
+    "id": 17,
+    "bloque": "IDENTIFICAR",
+    "pregunta": "¿Ha identificado procesos críticos del negocio (facturación, operaciones, atención al cliente) y dependencias tecnológicas?",
+    "core": true,
+    "priority": 9,
+    "apply": { "sizes": ["any"], "sectors": ["any"], "revenues": ["any"] }
+  },
+  {
+    "id": 18,
+    "bloque": "RESPONDER",
+    "pregunta": "¿Realizan simulacros o ejercicios de crisis (tabletop) para validar respuesta y comunicación ante incidentes?",
+    "core": false,
+    "priority": 6,
+    "apply": { "sizes": ["mid", "upper_mid", "any"], "sectors": ["finance", "health", "tech", "industry", "any"], "revenues": ["rev_c", "rev_d", "rev_e", "any"] }
+  },
+  {
+    "id": 19,
+    "bloque": "RECUPERAR",
+    "pregunta": "¿Tiene definidos objetivos de recuperación (RPO/RTO) para servicios críticos y se revisan periódicamente?",
+    "core": false,
+    "priority": 6,
+    "apply": { "sizes": ["small", "mid", "upper_mid", "any"], "sectors": ["any"], "revenues": ["rev_b", "rev_c", "rev_d", "rev_e", "any"] }
+  },
+  {
+    "id": 20,
+    "bloque": "DETECTAR",
+    "pregunta": "¿Existe un mínimo de registros (logs) centralizados y alertas sobre eventos críticos (admin, accesos, backups, cambios)?",
+    "core": false,
+    "priority": 7,
+    "apply": { "sizes": ["small", "mid", "upper_mid", "any"], "sectors": ["any"], "revenues": ["any"] }
   }
 ]
